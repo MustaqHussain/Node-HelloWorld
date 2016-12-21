@@ -1,0 +1,8 @@
+{"_id":{"$oid":"57ea76d2d982400c0833d6ce"},"title":"War and Peace","genre":"Historical Fiction","author":"Lev Nikolayevich Tolstoy","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6cf"},"title":"Les Misérables","genre":"Historical Fiction","author":"Victor Hugo","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d0"},"title":"The Time Machine","genre":"Science Fiction","author":"H. G. Wells","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d1"},"title":"A Journey into the Center of the Earth","genre":"Science Fiction","author":"Jules Verne","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d2"},"title":"The Dark World","genre":"Fantasy","author":"Henry Kuttner","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d3"},"title":"The Wind in the Willows","genre":"Fantasy","author":"Kenneth Grahame","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d4"},"title":"Life On The Mississippi","genre":"History","author":"Mark Twain","read":false}
+{"_id":{"$oid":"57ea76d2d982400c0833d6d5"},"title":"Childhood","genre":"Biography","author":"Lev Nikolayevich Tolstoy","read":false}
