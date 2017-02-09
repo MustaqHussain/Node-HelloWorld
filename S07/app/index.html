@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Libary App</title>
+
+    <!-- stylesheet href=...css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="scripts/bootstrap/dist/css/bootstrap-superhero.css">
+    <!--<link rel="stylesheet" href="styles/main.css">-->    
+  </head>
+  <body ng-app="libraryApp">
+
+    <!-- Application content here -->
+    <div ng-include="'views/header.html'"></div>
+
+    <div class="container"><div ng-view></div></div>
+    <!-- Application content end -->
+
+    <!-- scripts src=...js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+  <script>
+    var libraryAppModule = angular.module('libraryApp', ['ngRoute'])
+        .config(function ($routeProvider, $locationProvider) {
+            console.log('libraryApp config');
+            // Required for Angular 1.6.x adding %2F
+            $locationProvider.hashPrefix('');
+            $routeProvider
+                .when('/books', {
+                    templateUrl: '/views/books.html',
+                    controller: 'BooksCtrl'
+                })
+                .when('/book/:id', {
+                    templateUrl: '/views/book.html',
+                    controller: 'BookCtrl'
+                })
+                .when('/login', {
+                    templateUrl: '/views/login.html',
+                    controller: 'BooksCtrl'
+                })
+                .when('/', {
+                    templateUrl: '/views/home.html'
+                });            
+    });
+    // libraryAppModule.controller('BooksCtrl', function ($scope, $http) {
+    //     console.log('BooksCtrl 1 - before async http-get(..)');
+    //     $http.get('/allBooks')
+    //          .then (
+    //          (results) => {
+    //             console.log('--getAllBooks 2 - results from $http-allBooks - return Promise Fulfilled');
+    //             $scope.books = results.data;
+    //          },
+    //          (error) => {
+    //             console.log(error);                            
+    //          });
+    //     console.log('BooksCtrl 3 - leaving');  
+    // });    
+    libraryAppModule.controller('BooksCtrl', function ($scope, libraryQuery) {
+        console.log('BooksCtrl 1 - before async Promise.getAllBooks()');
+        libraryQuery.getAllBooks()
+                    .then( 
+                        (resultsRetuned) => {
+                            console.log('--BooksCtrl 2 - Fulfilled Promise getAllBooks, $scope updated');
+                            $scope.books = resultsRetuned;
+                        },
+                        (error) => {
+                            console.log('--BooksCtrl 2b - Rejected Promise getAllBooks');
+                            console.log(error);
+                        }
+                    );
+        console.log('BooksCtrl 3 - leaving');  
+    });
+    libraryAppModule.controller('BookCtrl', function ($scope, $sce, $routeParams, libraryQuery) {
+        // getBook() returns a Promise
+        libraryQuery.getBook( $routeParams.id )
+                    .then( 
+                        (resultsRetuned) => {
+                            $scope.book = resultsRetuned;
+                            $scope.trust = $sce.trustAsHtml;
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    );
+    });
+    libraryAppModule.factory('libraryQuery', function ($http, $q) {
+        return {
+            getAllBooks: function() {
+                console.log('getAllBooks 1 Entered - calling $http-allBooks');
+                var deferred = $q.defer();
+                // Get all books from DB - via Express
+                // $http APIs return a Promise
+                $http.get('/allBooks')
+                    .then (
+                        (results) => {
+                            console.log('--getAllBooks 2 - results from $http-allBooks - return Promise Fulfilled');
+                            deferred.resolve(results.data);
+                        },
+                        (error) => {
+                            console.log(error);
+                            deferred.reject(error);
+                        });
+                console.log('getAllBooks 3 Leaving - Promise Deferred');
+                return deferred.promise;
+            },
+            getBook: function (id) {
+                var deferred = $q.defer();
+                // Get book from DB - via Express
+                $http.get('/book/'+id)
+                    .then (
+                        (results) => {
+                            deferred.resolve(results.data[0]);
+                        },
+                        (error) => {
+                            console.log(error);
+                            deferred.reject(error);
+                        });
+                return deferred.promise;
+            }
+        };
+    });
+  </script>
+  </body>
+</html>

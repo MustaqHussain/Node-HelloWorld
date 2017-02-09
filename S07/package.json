@@ -1,0 +1,16 @@
+{
+  "name": "angular1-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.22",
+    "xml2js": "^0.4.17"
+  }
+}
