@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Demo on show how web page can be unresponsive to events</p>
+
+    <p id="timeIs"></p>
+    
+    <button onclick="hogThread()">Hog thread</button>
+    <img onmouseover="bigImg(this)" onmouseout="normalImg(this)" border="0" 
+                        src="smiley.gif" alt="Smiley" width="32" height="32">
+    <p id="start"></p>
+    <p id="end"></p>
+    <script>
+        // Set continual interval every 1000ms=1s update timeIs 
+        setInterval(() => {
+            document.getElementById("timeIs").innerHTML = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // Function that will hog the thread for ~10s - bad practise
+        function hogThread() {
+            document.getElementById("start").innerHTML = "Entered Hog thread: " + 
+                                                        new Date().toLocaleTimeString();
+            for (i = 0; i < 50000000; i++) {
+                a = "a" + i;
+            }
+            document.getElementById("end").innerHTML =   "Leaving Hog thread:     " + 
+                                                        new Date().toLocaleTimeString();
+        }
+
+        // Mouse image changes
+        function bigImg(x) {
+            x.style.height = "64px";
+            x.style.width = "64px";
+        }
+        function normalImg(x) {
+            x.style.height = "32px";
+            x.style.width = "32px";
+        }
+    </script>
+</body>
+</html>
