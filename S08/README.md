@@ -1,1 +1,1 @@
-Angular 2.4.0
+Angular Login, bcrypt, mongoDB
