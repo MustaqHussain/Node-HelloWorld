@@ -7,10 +7,10 @@ S05 - Angular 1.6.1 Introduction Part 1<br>
 S06 - Angular 1.6.1 Introduction Part 2<br>
 S07 - Angular 1.6.1 Introduction Part 3<br>
 S08 - Angular 1.6.1 Introduction Part 4<br>
-S09 - Angular 2.4.0 Introduction Part 1<br>
-S10 - Angular 2.4.0 Introduction Part 1<br>
-S11 - Angular 2.4.0 Introduction Part 2<br>
-S12 - JavaScript recap, Promises - Angular 2.4.0 Introduction Part 3<br>
+S09 - Angular 2.4.0 Introduction Part 1 - TypeScript, App Startup<br>
+S10 - Angular 2.4.0 Introduction Part 2 - Component, Routing<br>
+S11 - Angular 2.4.0 Introduction Part 3 - Observable<br>
+S12 - JavaScript recap, MSSQL & Promises q.all<br>
 S13 - Angular 4.0.0 (SQL Server, Express, Angular, Node)<br>
 S14 - .NET 4.5.2 & Angular 4.0.0<br>
 <br>
